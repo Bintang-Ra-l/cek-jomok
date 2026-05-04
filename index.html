@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cek Jomok</title>
+</head>
+<body style="font-family: Arial; text-align:center; margin-top:50px;">
+
+    <h1>Cek Seberapa Jomok Anda 😎</h1>
+
+    <input type="text" id="nama" placeholder="Masukkan nama">
+    <br><br>
+    <button onclick="cek()">Cek Sekarang</button>
+
+    <h2 id="hasil"></h2>
+
+    <script>
+        function cek() {
+            let nama = document.getElementById("nama").value;
+            let persen = Math.floor(Math.random() * 101);
+            let pesan = "";
+
+            if (persen === 100) {
+                pesan = "kesayangan atmin😘";
+            } else if (persen > 80) {
+                pesan = "Jomok banget 😜";
+            } else if (persen > 50) {
+                pesan = "Kok kamu jomok bang🤭";
+            } else if (persen > 30) {
+                pesan = "Jomok dikit🤨";
+            } else if (persen > 10) {
+                pesan = "Fomok😒";
+            } else if (persen > 1) {
+                pesan = "Suki😡";
+            } else {
+                pesan = "Kamu orang baik bang 😇";
+            }
+
+            document.getElementById("hasil").innerText =
+                nama + ", tingkat jomok kamu: " + persen + "% - " + pesan;
+        }
+    </script>
+
+</body>
+</html>
