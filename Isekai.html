@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Isekai Generator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0f0f1a, #1c1c3a);
+        color: white;
+        text-align: center;
+        padding: 30px;
+    }
+
+    h1 {
+        color: #00d4ff;
+    }
+
+    .container {
+        background: rgba(255,255,255,0.05);
+        padding: 20px;
+        border-radius: 10px;
+        width: 350px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    input {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: none;
+    }
+
+    button {
+        padding: 10px 20px;
+        background: #00d4ff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background: #00aacc;
+    }
+
+    .result {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    .stat {
+        margin: 5px 0;
+    }
+</style>
+</head>
+<body>
+
+<h1>Isekai Generator</h1>
+
+<div class="container">
+    <p>Kamu akan terlahir kembali ke dunia lain.<br>
+    Silahkan input namamu dan lihat siapa dirimu di kehidupan berikutnya.</p>
+
+    <input type="text" id="name" placeholder="Masukkan nama kamu">
+    <input type="number" id="age" placeholder="Usia kematian">
+
+    <button onclick="generate()">Reinkarnasi</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function randomStat() {
+    return Math.floor(Math.random() * 100) + 1;
+}
+
+function generate() {
+    let name = document.getElementById("name").value.toLowerCase();
+    let age = document.getElementById("age").value;
+
+    if (!name || !age) {
+        alert("Isi semua dulu!");
+        return;
+    }
+
+    let stats = {
+        speed: randomStat(),
+        durability: randomStat(),
+        attack: randomStat(),
+        agility: randomStat(),
+        mana: randomStat(),
+        charm: randomStat()
+    };
+
+    let role = "";
+
+    // Special name trigger
+    if (name.includes("ark")) {
+        role = "Sosok Hitam";
+    } else {
+
+        let avg = (stats.speed + stats.durability + stats.attack + stats.agility + stats.mana + stats.charm) / 6;
+
+        if (avg < 30) {
+            role = ["NPC", "Prajurit Tumbal Proyek"][Math.floor(Math.random()*2)];
+        }
+        else if (stats.charm > 85) {
+            role = ["Wanita Cantik", "Pangeran Tampan", "Femboy"][Math.floor(Math.random()*3)];
+        }
+        else if (avg > 85) {
+            role = ["Raja", "Ratu", "Ksatria Suci"][Math.floor(Math.random()*3)];
+        }
+        else if (stats.mana > 80) {
+            role = ["Penyihir", "Iblis", "Raja Iblis"][Math.floor(Math.random()*3)];
+        }
+        else if (stats.attack > 80) {
+            role = ["Raja Hitam", "Penunggang Kuda"][Math.floor(Math.random()*2)];
+        }
+        else if (avg < 50) {
+            role = ["Budak Korporat", "Pengasah Linggis"][Math.floor(Math.random()*2)];
+        }
+        else {
+            role = ["Elf", "Undead", "Putri", "Permaisuri", "Jomok"][Math.floor(Math.random()*5)];
+        }
+    }
+
+    let resultHTML = `
+        <h3>Hasil Reinkarnasi</h3>
+        <p><b>Nama:</b> ${name}</p>
+        <p><b>Usia Kematian:</b> ${age}</p>
+
+        <h4>Statistik:</h4>
+        <div class="stat">Speed: ${stats.speed}</div>
+        <div class="stat">Durability: ${stats.durability}</div>
+        <div class="stat">Attack: ${stats.attack}</div>
+        <div class="stat">Agility: ${stats.agility}</div>
+        <div class="stat">Mana: ${stats.mana}</div>
+        <div class="stat">Charm: ${stats.charm}</div>
+
+        <h3>Role: ${role}</h3>
+    `;
+
+    document.getElementById("result").innerHTML = resultHTML;
+}
+</script>
+
+</body>
+</html>
